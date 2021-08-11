@@ -11,7 +11,7 @@ class Linked_list: protected Node{
 	private:
 		Node* head; //HEAD pointer points to head
 		Node* tail; //Tail pointer points to tail
-	
+		
 	public:	
 		Linked_list(int a){ //Creates the first node 
 			head =new Node; //new node
@@ -42,27 +42,57 @@ class Linked_list: protected Node{
 			Node* itr; //iterator pointer
 			if(a==-1){
 			for(itr=head;itr->next!=tail;itr=itr->next){
+				if(itr==tail){
+					cout<<"INDEX OVERFLOW!";
+					break;
+					}
 				} // going till the second last node
 				delete tail; //delete the last node 
 				tail=itr; //updating tail
 				tail->next=NULL; //updating tail next
 			
-			}else{ 
-				for(index=0;index!=a;index++){	
-				}								
-			
-			
-			}
-			
-		void insert(int data, int index){
-			
-			
-			
-			}
-			
-		
+			}else{
+			if(a==0){
+				head=head->next;
+				}else{ 
+					itr=head;
+					for(int index=1;index!=a;index++){
+						itr = itr->next;
+						if(itr==tail){
+					cout<<"INDEX OVERFLOW!";
+					break;
+					} 	
+					}
+					itr->next=itr->next->next;			
+			}	
 		}
-
+	}
+	
+	void insert(int data, int index){
+		Node* itr=head;
+		Node* temp;
+		if(index==0){
+			head=new Node;
+			head->Data=data;
+			head->next=itr;
+		}else{
+			for(int i=1;i!=index;i++){
+				itr=itr->next;
+				if(itr==tail){
+					cout<<"INDEX OVERFLOW!";
+					break;
+					}
+				}
+				temp=itr;
+				itr=itr->next;
+				temp->next=new Node;
+				temp=temp->next;
+				temp->Data=data;
+				temp->next=itr;
+				
+			}
+	}	
+		
 
 };
 
@@ -74,6 +104,12 @@ int main(){
 	a.append(99);
 	a.print();
 	a.del();
+	a.del(1);
+	a.insert(69,0);
+	a.insert(143,0);
 	a.print();
+	a.insert(77,2);
+	a.print();
+	a.insert(999,8);
 	return 0;
 }
