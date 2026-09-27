@@ -18,6 +18,39 @@ class DoublyLinkedList:
             print(temp.value)
             temp = temp.next
 
-dll = DoublyLinkedList(95)
+    def append(self,value):
+        new_node = Node(value)
+        if not self.head:
+            self.head = new_node
+            self.tail = new_node
+        else:
+            self.tail.next = new_node
+            new_node.prev = self.tail
+            self.tail = new_node
+        self.length+=1
+        return True
 
+    def pop(self):
+        if not self.head:
+            return None
+        elif self.head == self.tail:
+            self.head = None
+            self.tail = None
+        else:
+            temp = self.tail
+            self.tail = self.tail.prev
+            self.tail.next = None
+            temp.prev = None
+        self.length -=1
+        return True
+
+dll = DoublyLinkedList(95)
+dll.append(96)
+dll.append(97)
+dll.append(98)
+dll.pop()
+dll.pop()
+dll.pop()
+# print(dll.pop())
+# print(dll.pop())
 dll.print_list()
