@@ -69,16 +69,32 @@ class DoublyLinkedList:
         self.length-=1
         return temp
 
+    def get(self,index):
+
+        if index <0 or index >= self.length:
+            return None
+        if index < self.length/2:
+            temp = self.head
+            for _ in range(index):
+                temp = temp.next
+        else:
+            temp = self.tail
+            for _ in range(self.length - 1 - index): # can also be written as range(self.length-1,index,-1)
+                temp = temp.prev
+        return temp
+
+
 
 dll = DoublyLinkedList(95)
 dll.append(96)
 dll.append(97)
 dll.append(98)
-dll.pop()
-dll.pop()
-dll.pop()
+# dll.pop()
+# dll.pop()
+# dll.pop()
 # print(dll.pop())
 # print(dll.pop())
-# dll.prepend(69)
-print(dll.pop_first().value)
+dll.prepend(69)
+# print(dll.pop_first().value)
 dll.print_list()
+print(dll.get(4).value)
