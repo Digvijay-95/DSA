@@ -33,16 +33,16 @@ class DoublyLinkedList:
     def pop(self):
         if not self.head:
             return None
-        elif self.head == self.tail:
+        temp = self.tail
+        if self.head == self.tail:
             self.head = None
             self.tail = None
         else:
-            temp = self.tail
             self.tail = self.tail.prev
             self.tail.next = None
             temp.prev = None
         self.length -=1
-        return True
+        return temp
 
     def prepend(self,value):
         new_node = Node(value)
@@ -54,6 +54,7 @@ class DoublyLinkedList:
             self.head.prev = new_node
             self.head = new_node
         self.length+=1
+        return True
 
     def pop_first(self):
         if not self.head:
@@ -89,6 +90,30 @@ class DoublyLinkedList:
             node.value = value
             return True
         return False
+    
+    def insert(self,index,value):
+        if index < 0 or index > self.length:
+            return False
+        if index == 0:
+            self.prepend(value)
+            return True
+        if index == self.length:
+            self.append(value)
+            return True
+        
+        node =self.get(index - 1)
+        new_node = Node(value)
+
+        new_node.next = node.next
+        new_node.prev = node
+        node.next = new_node
+        new_node.next.prev = new_node
+
+        self.length +=1
+        return True
+
+
+
 
 
 
