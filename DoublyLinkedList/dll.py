@@ -112,6 +112,25 @@ class DoublyLinkedList:
         self.length +=1
         return True
 
+    def remove(self,index):
+        if index <0 or index>=self.length:
+            return None
+
+        if index == 0:
+            return self.pop_first()
+        if index ==self.length-1:
+            return self.pop()
+
+        node = self.get(index)
+        before = node.prev
+        after = node.next
+        before.next = after
+        after.prev = before
+        node.next = None
+        node.prev = None
+        self.length -=1
+        return node
+
 
 
 
@@ -129,5 +148,8 @@ dll.append(98)
 dll.prepend(69)
 # print(dll.pop_first().value)
 dll.set_value(0,143)
+dll.insert(1,11111)
+dll.print_list()
+dll.remove(5)
 dll.print_list()
 print(dll.get(4).value)
