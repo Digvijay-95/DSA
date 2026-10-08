@@ -17,6 +17,17 @@ class Stack:
         self.top = new_node
         self.length+=1
         return True
+    
+    def pop(self):
+        if not self.top:
+            return None
+        temp = self.top
+        self.top = self.top.next
+        temp.next = None
+        self.length -=1
+        return temp
+    
+    
     def print_stack(self):
         temp = self.top
         while temp:
@@ -27,4 +38,5 @@ class Stack:
 
 my_stack = Stack(4)
 my_stack.push(3)
+print("popped -->",my_stack.pop().value)
 my_stack.print_stack()
